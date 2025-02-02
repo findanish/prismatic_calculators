@@ -1,0 +1,137 @@
+/* Global styles */
+:root {
+    --bg-light: #f4f4f4;
+    --text-light: #333;
+    --bg-dark: #333;
+    --text-dark: #f4f4f4;
+    --blue-5: #007bff;
+    --blue-6: #0056b3;
+    --surface-1: #ffffff;
+    --surface-2: #f0f0f0;
+    --surface-3: #e6e6e6;
+    --text-1: #000;
+    --radius-2: 8px;
+    --size-2: 12px;
+    --size-3: 16px;
+    --size-4: 20px;
+    --font-sans: 'Arial', sans-serif;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    display: flex;
+    height: 100vh;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sidebar {
+    width: 200px;
+    background: var(--surface-3);
+    padding: var(--size-4);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: var(--text-1);
+    padding: var(--size-2);
+    display: block;
+    transition: background 0.3s;
+}
+
+.sidebar a:hover {
+    background: var(--surface-2);
+}
+
+.content {
+    max-width: 400px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--size-4);
+    margin-left: 20px;
+}
+
+select, input, button {
+    width: 100%;
+    padding: var(--size-2);
+    margin-top: var(--size-2);
+    border: none;
+    border-radius: var(--radius-2);
+}
+
+select, input {
+    background: var(--surface-2);
+    color: var(--text-1);
+}
+
+button {
+    background: var(--blue-5);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: var(--blue-6);
+}
+
+.results {
+    text-align: left;
+    background: var(--surface-2);
+    padding: var(--size-2);
+    border-radius: var(--radius-2);
+    margin-top: var(--size-3);
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: var(--size-2);
+    margin-bottom: var(--size-3);
+}
+
+.toggle-slider {
+    position: relative;
+    width: 50px;
+    height: 25px;
+    background: var(--bg-dark);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.toggle-slider::before {
+    content: '\1F319'; /* Crescent moon icon */
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--surface-1);
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.dark-mode {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+.dark-mode .toggle-slider {
+    background: var(--blue-6);
+}
+
+.dark-mode .toggle-slider::before {
+    left: 25px;
+}
