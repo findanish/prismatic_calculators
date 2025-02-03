@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Calculator } from './components/Calculator';
 
+console.log('App component is rendering');
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 

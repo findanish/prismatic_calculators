@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { recipes } from '../data/recipes';
 import type { CalculationResult } from '../types';
+import { Calculator as CalculatorIcon } from 'lucide-react';
 
 export function Calculator() {
   const [selectedItem, setSelectedItem] = useState(recipes[0].value);
   const [quantity, setQuantity] = useState(1);
   const [result, setResult] = useState<CalculationResult | null>(null);
+  const [reset, setReset] = useState(false);
 
   const calculateResources = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,16 +22,20 @@ export function Calculator() {
         quantity: ing.quantity * quantity
       }))
     });
+    setReset(true);
+  };
+
+  const handleReset = () => {
+    setSelectedItem(recipes[0].value);
+    setQuantity(1);
+    setResult(null);
+    setReset(false);
   };
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white dark:bg-black rounded-xl shadow-lg">
       <div className="flex items-center space-x-4 mb-8">
-        <img 
-          src="https://cdn.nwdb.info/db/images/live/v2/icons/items/resource/prismaticplankt1.png"
-          alt="Prismatic Plank"
-          className="w-12 h-12 object-contain"
-        />
+        <CalculatorIcon className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
           Prismatic Planks Calculator
         </h2>
@@ -55,23 +61,29 @@ export function Calculator() {
 
         <div className="space-y-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Quantity (1-10)
+            Quantity
           </label>
           <input
             type="number"
             min="1"
-            max="10"
             value={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}
+            onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
             className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-black text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
           />
         </div>
 
         <button
           type="submit"
-          className="w-full px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+          className="w-full px-6 py-3 bg-black dark:bg-white text-white dark:text-black font-medium rounded-lg transition-colors hover:bg-gray-800 dark:hover:bg-gray-100"
         >
           Calculate Resources
+        </button>
+        <button
+          type="button"
+          className="w-full px-6 py-3 bg-indigo-200 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 font-medium rounded-lg transition-colors hover:bg-indigo-300 dark:hover:bg-indigo-800"
+          onClick={handleReset}
+        >
+          Reset
         </button>
       </form>
 
